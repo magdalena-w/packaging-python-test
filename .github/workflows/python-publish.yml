@@ -1,0 +1,35 @@
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Upload Python Package to TestPyPI
+
+on: push
+
+jobs:
+  build-n-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+    - name: Install pypa/build
+      run: |
+        python -m pip install --upgrade pip
+        pip install build
+    - name: Build packagea binary wheel and a source tarball
+      run: |
+        python -m build --sdist --wheel --outdir dist/ 
+    - name: Publish package to Test PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.pypi-AgENdGVzdC5weXBpLm9yZwIkMGMzMGJhZjAtZjhkYi00ZjMyLWIyMDEtNDkyMDdjNTRjYjVkAAIqWzMsIjhkYmI2MzRhLWY1M2MtNGQxOS04M2VhLTU2MGIyY2Y1YWFlMSJdAAAGII224totaYBI3YKqTK36UJhgncv0Vrmh9LdEV3rBcMpV }}
+        repository-url: https://test.pypi.org/legacy/
