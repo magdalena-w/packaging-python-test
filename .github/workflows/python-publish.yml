@@ -28,8 +28,9 @@ jobs:
       run: |
         python -m build --sdist --wheel --outdir dist/ 
     - name: Publish package to Test PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
+      if: startsWith(github.ref, 'refs/tags')
+      uses: pypa/gh-action-pypi-publish@master
       with:
         user: __token__
-        password: ${{ secrets.pypi-AgENdGVzdC5weXBpLm9yZwIkMGMzMGJhZjAtZjhkYi00ZjMyLWIyMDEtNDkyMDdjNTRjYjVkAAIqWzMsIjhkYmI2MzRhLWY1M2MtNGQxOS04M2VhLTU2MGIyY2Y1YWFlMSJdAAAGII224totaYBI3YKqTK36UJhgncv0Vrmh9LdEV3rBcMpV }}
+        password: ${{ pypi-AgENdGVzdC5weXBpLm9yZwIkMGMzMGJhZjAtZjhkYi00ZjMyLWIyMDEtNDkyMDdjNTRjYjVkAAIqWzMsIjhkYmI2MzRhLWY1M2MtNGQxOS04M2VhLTU2MGIyY2Y1YWFlMSJdAAAGII224totaYBI3YKqTK36UJhgncv0Vrmh9LdEV3rBcMpV }}
         repository-url: https://test.pypi.org/legacy/
