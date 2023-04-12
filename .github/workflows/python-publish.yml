@@ -27,7 +27,6 @@ jobs:
     - name: Build packagea binary wheel and a source tarball
       run: |
         python -m build --sdist --wheel --outdir dist/ 
-        twine upload --skip-existing dist/*
     - name: Publish package to Test PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
